@@ -1,3 +1,30 @@
+const div = document.querySelector('div.options')    
+const rock = document.querySelector(".rock")
+const paper = document.querySelector(".paper")    
+const scissors = document.querySelector(".scissors")
+const humanMoves = document.querySelector('h2.human')
+const computerMoves = document.querySelector('h2.computer')
+const outcome = document.querySelector('h2.outcome')
+const current = document.querySelector('.currentScore h2')
+const final = document.querySelector('.finalScore h2')
+const reload = document.querySelector(".reload h2")
+const optionsBtn = document.querySelectorAll('div.options div');
+
+// Initialising Scores
+let humanScore = 0
+let computerScore = 0
+
+// Human choice for rock paper scissors
+const getHumanChoice = (e) => {
+  let playerSelection = (e.target.id);
+  playRound(playerSelection, getComputerChoice())
+}
+
+// Refreshes page/game
+reload.addEventListener('click', () => {
+  location.reload();
+})
+
 // Computer choice for rock paper scissors
 const getComputerChoice = () => {
   random = Math.floor(Math.random() * 3);
@@ -12,95 +39,97 @@ const getComputerChoice = () => {
   }
 }
 
-// Initialising Scores
-let humanScore = 0
-let computerScore = 0
-// Logic for 1 round of game
+//Allows game to be started
+optionsBtn.forEach(option => {
+  option.addEventListener('click', getHumanChoice);
+})
+
+// Logic for Game
 const playRound = (humanChoice, computerChoice) => {
+  humanMoves.classList.remove('hide')
+  computerMoves.classList.remove('hide')
+  outcome.classList.remove('hide')
+
   if (humanChoice === computerChoice) {
-    console.log(`Computer chose ${computerChoice}`)
-    console.log(`You chose ${humanChoice}`)
-    console.log('Draw, play again')
+    moveChoice(humanChoice, computerChoice)
+    outcome.textContent = 'Draw Play Again!'
   }
   else if (humanChoice === 'paper' && computerChoice === 'rock') {
-    console.log(`Computer chose ${computerChoice}`)
-    console.log(`You chose ${humanChoice}`)
-    console.log('You Win! Paper beats Rock');
+    moveChoice(humanChoice, computerChoice)
+    outcome.textContent = 'You Win! Paper Beats Rock!'
     humanScore += 1
   }
   else if (humanChoice === 'rock' && computerChoice === 'paper') {
-    console.log(`Computer chose ${computerChoice}`)
-    console.log(`You chose ${humanChoice}`)
-    console.log('You Lose! Paper beats Rock');
+    moveChoice(humanChoice, computerChoice)
+    outcome.textContent = 'You Lose :( Rock Beats Paper!'
     computerScore += 1
   }
   else if (humanChoice === 'paper' && computerChoice === 'scissors') {
-    console.log(`Computer chose ${computerChoice}`)
-    console.log(`You chose ${humanChoice}`)
-    console.log('You Lose! Scissors beats Paper');
+    moveChoice(humanChoice, computerChoice)
+    outcome.textContent = 'You Lose :( Scissors Beats Paper!'
     computerScore += 1
   }
   else if (humanChoice === 'scissors' && computerChoice === 'paper') {
-    console.log(`Computer chose ${computerChoice}`)
-    console.log(`You chose ${humanChoice}`)
-    console.log('You Win! Scissors beats Paper');
+    moveChoice(humanChoice, computerChoice)
+    outcome.textContent = 'You Win! Scissors Beats Paper!'
     humanScore += 1
   }
   else if (humanChoice === 'rock' && computerChoice === 'scissors') {
-    console.log(`Computer chose ${computerChoice}`)
-    console.log(`You chose ${humanChoice}`)
-    console.log('You Win! Rock beats Scissors');
+    moveChoice(humanChoice, computerChoice)
+    outcome.textContent = 'You Win! Rock Beats Scissors!'
     humanScore += 1
   }
   else if (humanChoice === 'scissors' && computerChoice === 'rock') {
-    console.log(`Computer chose ${computerChoice}`)
-    console.log(`You chose ${humanChoice}`)
-    console.log('You Lose! Rock beats Scissors');
+    moveChoice(humanChoice, computerChoice)
+    outcome.textContent = 'You Lose! :( Rock Beats Scissors!'
     computerScore += 1
   }
+  currentScore()
   checkWinner()
 }
 
-    
-// Human choice for rock paper scissors
-const getHumanChoice = (e) => {
-let playerSelection = (e.target.value);
-  playRound(playerSelection, getComputerChoice())
+//Text for moves
+const moveChoice = (humanChoice, computerChoice) => {
+  humanMoves.textContent = `You chose ${humanChoice}`
+  computerMoves.textContent = `Computer chose ${computerChoice}`
 }
 
-const h1 = document.querySelector('h1')
-h1.textContent = 'Rock Paper Scissors'
-    
-const div = document.querySelector('div')
-const list = document.querySelector('ul')
-div.appendChild(list)
-div.classList.add('options')
-    
-const rock = document.createElement("button")
-list.appendChild(rock)
-rock.textContent = "Rock"
-rock.value = "rock"
-    
-const paper = document.createElement("button")
-list.appendChild(paper)
-paper.textContent = "Paper"
-paper.value = 'paper'
-    
-const scissors = document.createElement("button")
-list.appendChild(scissors)
-scissors.textContent = "Scissors"
-scissors.value = 'scissors'
-    
-const optionsBtn = document.querySelectorAll('.options button');
-optionsBtn.forEach((button) => {
-  button.addEventListener('click', getHumanChoice);
-})
+//Text for score
+const currentScore = () => {
+  current.classList.remove('hide')
+  current.textContent = `Current Score is Player: ${humanScore} - CPU: ${computerScore}`
+}
 
+//Final score check with text
 const checkWinner = () => {
   if (humanScore == 5 && humanScore > computerScore) {
-    console.log(`You won the game! The score was ${humanScore} - ${computerScore}`)
+    current.classList.add('hide')
+    humanMoves.classList.add('hide')
+    computerMoves.classList.add('hide')
+    outcome.classList.add('hide')
+    final.classList.remove('hide')
+    final.textContent = `You won the game! The score was ${humanScore} - ${computerScore}`
+    reload.classList.remove('hide')
+    rock.classList.add('hide')
+    paper.classList.add('hide')
+    scissors.classList.add('hide')
+    optionsBtn.forEach(option => {
+      option.removeEventListener('click', getHumanChoice);
+    })
   }
   else if (computerScore == 5 && humanScore < computerScore) {
-    console.log(`You lost the game :( The score was ${humanScore} - ${computerScore}`)
+    current.classList.add('hide')
+    humanMoves.classList.add('hide')
+    computerMoves.classList.add('hide')
+    outcome.classList.add('hide')
+    final.classList.remove('hide')
+    final.textContent = `You lost the game :( The score was ${humanScore} - ${computerScore}`
+    reload.classList.remove('hide')
+    rock.classList.add('hide')
+    paper.classList.add('hide')
+    scissors.classList.add('hide')
+    optionsBtn.forEach(option => {
+      option.removeEventListener('click', getHumanChoice);
+    })
   }
 }

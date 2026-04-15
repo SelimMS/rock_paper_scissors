@@ -3,15 +3,40 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
     <title>Document</title>
   </head>
   <body>
+    <h1 class="title">Rock Paper Scissors</h1>
 
-    <h1>Rock Paper</h1>
-    <div>
-      <ul>
-        
-      </ul>
+    <div class="options unselectable">
+      <div class="rock">
+        <h2 class="pointer" id="rock">Rock</h2>
+      </div>
+      <div class="paper">
+        <h2 class="pointer" id="paper">Paper</h2>
+      </div>
+      <div class="scissors">
+        <h2 class="pointer" id="scissors">Scissors</h2>
+      </div>
+    </div>
+
+    <div class="score">
+      <div class="moves">
+        <h2 class="hide human"></h2>
+        <h2 class="hide computer"></h2>
+        <h2 class="hide outcome"></h2>
+      </div>
+      <div class="currentScore">
+        <h2 class="hide">Current Score: </h2>
+      </div>
+      <div class="finalScore">
+        <h2 class="hide">Final Score: </h2>
+      </div>
+    </div>
+
+    <div class="reload">
+      <h2 class="pointer hide unselectable">Play Again!</h2>
     </div>
     <script src="script.js">
     </script>
