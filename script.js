@@ -2,13 +2,15 @@ const div = document.querySelector('div.options')
 const rock = document.querySelector(".rock")
 const paper = document.querySelector(".paper")    
 const scissors = document.querySelector(".scissors")
-const humanMoves = document.querySelector('h2.human')
-const computerMoves = document.querySelector('h2.computer')
-const outcome = document.querySelector('h2.outcome')
-const current = document.querySelector('.currentScore h2')
-const final = document.querySelector('.finalScore h2')
-const reload = document.querySelector(".reload h2")
+const humanMoves = document.querySelector('.human')
+const computerMoves = document.querySelector('.computer')
+const outcome = document.querySelector('.outcome')
+const current = document.querySelector('.currentScore')
+const final = document.querySelector('.finalScore')
+const reload = document.querySelector(".reload")
 const optionsBtn = document.querySelectorAll('div.options div');
+const playBtn = document.querySelector('.play')
+const headerText = document.querySelector('.header p')
 
 // Initialising Scores
 let humanScore = 0
@@ -24,6 +26,16 @@ const getHumanChoice = (e) => {
 reload.addEventListener('click', () => {
   location.reload();
 })
+
+const playGame = () => {
+  rock.classList.remove('hide')
+  paper.classList.remove('hide')
+  scissors.classList.remove('hide')
+  playBtn.classList.add('hide')
+  headerText.classList.add('hide')
+}
+
+playBtn.addEventListener('click', playGame)
 
 // Computer choice for rock paper scissors
 const getComputerChoice = () => {
@@ -52,36 +64,50 @@ const playRound = (humanChoice, computerChoice) => {
 
   if (humanChoice === computerChoice) {
     moveChoice(humanChoice, computerChoice)
-    outcome.textContent = 'Draw Play Again!'
+    outcome.classList.remove('lose')
+    outcome.classList.remove('win')
+    outcome.textContent = 'Draw - Play Again!'
   }
   else if (humanChoice === 'paper' && computerChoice === 'rock') {
     moveChoice(humanChoice, computerChoice)
     outcome.textContent = 'You Win! Paper Beats Rock!'
+    outcome.classList.remove('lose')
+    outcome.classList.add('win')
     humanScore += 1
   }
   else if (humanChoice === 'rock' && computerChoice === 'paper') {
     moveChoice(humanChoice, computerChoice)
-    outcome.textContent = 'You Lose :( Rock Beats Paper!'
+    outcome.textContent = 'You Lose - Rock Beats Paper!'
+    outcome.classList.remove('win')
+    outcome.classList.add('lose')
     computerScore += 1
   }
   else if (humanChoice === 'paper' && computerChoice === 'scissors') {
     moveChoice(humanChoice, computerChoice)
-    outcome.textContent = 'You Lose :( Scissors Beats Paper!'
+    outcome.textContent = 'You Lose - Scissors Beats Paper!'
+    outcome.classList.remove('win')
+    outcome.classList.add('lose')
     computerScore += 1
   }
   else if (humanChoice === 'scissors' && computerChoice === 'paper') {
     moveChoice(humanChoice, computerChoice)
     outcome.textContent = 'You Win! Scissors Beats Paper!'
+    outcome.classList.remove('lose')
+    outcome.classList.add('win')
     humanScore += 1
   }
   else if (humanChoice === 'rock' && computerChoice === 'scissors') {
     moveChoice(humanChoice, computerChoice)
     outcome.textContent = 'You Win! Rock Beats Scissors!'
+    outcome.classList.remove('lose')
+    outcome.classList.add('win')
     humanScore += 1
   }
   else if (humanChoice === 'scissors' && computerChoice === 'rock') {
     moveChoice(humanChoice, computerChoice)
-    outcome.textContent = 'You Lose! :( Rock Beats Scissors!'
+    outcome.textContent = 'You Lose - Rock Beats Scissors!'
+    outcome.classList.remove('win')
+    outcome.classList.add('lose')
     computerScore += 1
   }
   currentScore()
@@ -90,8 +116,8 @@ const playRound = (humanChoice, computerChoice) => {
 
 //Text for moves
 const moveChoice = (humanChoice, computerChoice) => {
-  humanMoves.textContent = `You chose ${humanChoice}`
-  computerMoves.textContent = `Computer chose ${computerChoice}`
+  humanMoves.textContent = `You chose: ${humanChoice}`
+  computerMoves.textContent = `CPU chose: ${computerChoice}`
 }
 
 //Text for score
@@ -108,7 +134,8 @@ const checkWinner = () => {
     computerMoves.classList.add('hide')
     outcome.classList.add('hide')
     final.classList.remove('hide')
-    final.textContent = `You won the game! The score was ${humanScore} - ${computerScore}`
+    final.classList.add('win')
+    final.textContent = `You won the game! The Final Score Was You: ${humanScore} - CPU: ${computerScore}`
     reload.classList.remove('hide')
     rock.classList.add('hide')
     paper.classList.add('hide')
@@ -123,7 +150,8 @@ const checkWinner = () => {
     computerMoves.classList.add('hide')
     outcome.classList.add('hide')
     final.classList.remove('hide')
-    final.textContent = `You lost the game :( The score was ${humanScore} - ${computerScore}`
+    final.classList.add('lose')
+    final.textContent = `You lost the game :(  The Final Score Was You: ${humanScore} - CPU: ${computerScore}`
     reload.classList.remove('hide')
     rock.classList.add('hide')
     paper.classList.add('hide')

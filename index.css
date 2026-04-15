@@ -25,12 +25,32 @@
   text-transform: capitalize;
 }
 
+.header {
+  text-align: center;
+  padding: 10px;
+}
+
+.header p {
+  font-size: 20px;
+  font-family: sans-serif;
+  margin-top: -25px;
+  padding: 15px;
+}
+
+.play {
+  border: 1px solid black;
+  padding: 10px;
+  text-align: center;
+  justify-self: center;
+  font-family: sans-serif;
+  font-size: 30px;
+}
 
 .title {
   font-family: sans-serif;
   font-size: 48px;
   text-align: center;
-  padding: 25px;
+  padding: 30px;
 }
 
 .options {
@@ -39,13 +59,52 @@
   align-items: center;
   justify-content: center;
   font-family: sans-serif;
-  font-size: 24px;
+  font-size: 30px;
+  margin-top: -20px;
 }
 
-.options div{
+.options div, .reload{
   border: 1px solid black;
   padding: 10px;
   width: 160px;
   text-align: center;
 }
 
+.reload {
+  justify-self: center;
+  font-family: sans-serif;
+  font-size: 30px;
+}
+
+.score {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 30px;
+  gap: 10px;
+  font-family: sans-serif;
+  font-size: 25px;
+}
+
+.moves p{
+  font-weight: 300;
+}
+
+.currentScore, .finalScore {
+  font-size: 35px;
+  font-weight: 500;
+}
+
+.win {
+  color: green;
+}
+
+.lose {
+  color: red;
+}
+
+.finalScore {
+  margin-top: -40px;
+}

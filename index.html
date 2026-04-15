@@ -7,36 +7,41 @@
     <title>Document</title>
   </head>
   <body>
-    <h1 class="title">Rock Paper Scissors</h1>
-
+    <div class="header">
+      <h1 class="title">Rock Paper Scissors</h1>
+      <p>First to 5 wins!</p>
+    </div>
+    <div class="play unselectable pointer">
+      <p>Play Game!</p>
+    </div>
     <div class="options unselectable">
-      <div class="rock">
-        <h2 class="pointer" id="rock">Rock</h2>
+      <div class="rock pointer hide">
+        <p id="rock">Rock</p>
       </div>
-      <div class="paper">
-        <h2 class="pointer" id="paper">Paper</h2>
+      <div class="paper pointer hide">
+        <p id="paper">Paper</p>
       </div>
-      <div class="scissors">
-        <h2 class="pointer" id="scissors">Scissors</h2>
+      <div class="scissors pointer hide">
+        <p id="scissors">Scissors</p>
       </div>
     </div>
 
     <div class="score">
       <div class="moves">
-        <h2 class="hide human"></h2>
-        <h2 class="hide computer"></h2>
-        <h2 class="hide outcome"></h2>
+        <p class="hide human"></p>
+        <p class="hide computer"></p>
+        <p class="hide outcome"></p>
       </div>
-      <div class="currentScore">
-        <h2 class="hide">Current Score: </h2>
+      <div class="currentScore hide">
+        <p>Current Score: </p>
       </div>
-      <div class="finalScore">
-        <h2 class="hide">Final Score: </h2>
+      <div class="finalScore hide">
+        <p>Final Score: </p>
       </div>
     </div>
 
-    <div class="reload">
-      <h2 class="pointer hide unselectable">Play Again!</h2>
+    <div class="reload hide pointer">
+      <p class="unselectable">Play Again!</p>
     </div>
     <script src="script.js">
     </script>
